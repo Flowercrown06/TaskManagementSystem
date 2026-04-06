@@ -13,5 +13,5 @@ RUN ./gradlew clean build -x test
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-EXPOSE 9001
+EXPOSE 9000
 ENTRYPOINT ["java", "-jar", "app.jar"]

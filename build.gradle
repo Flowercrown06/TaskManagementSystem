@@ -6,7 +6,6 @@ plugins {
 
 group = 'az.company'
 version = '0.0.1-SNAPSHOT'
-// Kompüterində JDK 17 olduğu üçün bunu 17 etmək daha yaxşıdır
 sourceCompatibility = '17'
 
 configurations {
