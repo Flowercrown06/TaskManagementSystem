@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.7'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'az.company'
+version = '0.0.1-SNAPSHOT'
+// Kompüterində JDK 17 olduğu üçün bunu 17 etmək daha yaxşıdır
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+test {
+    useJUnitPlatform() // Bu sətir yoxdursa, JUnit 5 testləri işləməyəcək!
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 1. Web & Validation
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
+
+    // 2. Database & Persistence
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'com.h2database:h2'
+
+    // 3. Security & JWT
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // 4. Email & Utilities
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'com.google.zxing:core:3.5.2'
+    implementation 'com.google.zxing:javase:3.5.2'
+
+    // 5. MapStruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+    // 6. Lombok və Annotation Processors (ARDICILLIQ VACİBDİR)
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // MapStruct prosessoru Lombok-dan SONRA gəlməlidir
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // Lombok və MapStruct-ın birgə işləməsi üçün bağlayıcı
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    // 7. Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.mockito:mockito-inline:4.8.1'
+
+    // Testlər üçün də Lombok (lazım ola bilər)
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+
